@@ -35,9 +35,7 @@ const VisionaryLeadership = () => {
 
           {/* Action Row */}
           <div className="flex flex-row items-center md:gap-[104px]">
-            <button className="px-10 py-3 bg-white text-black text-sm font-semibold rounded-full hover:bg-gray-200 transition-all active:scale-95 shrink-0">
-              Know More
-            </button>
+        
 
             <div className="hidden sm:flex items-center">
               <div className="relative w-[313px] h-[80px]">

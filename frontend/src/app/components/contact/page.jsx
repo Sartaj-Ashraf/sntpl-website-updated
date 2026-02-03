@@ -138,24 +138,6 @@ const Contact = () => {
                 </div>
               </div>
             </div>
-
-            {/* Social Icons */}
-            <div className="flex gap-4 mt-12 justify-center lg:justify-start">
-              {[
-                { icon: <Instagram size={20} />, label: "Instagram" },
-                { icon: <Twitter size={20} />, label: "Twitter" },
-                { icon: <MessageSquare size={20} />, label: "Messenger" },
-                { icon: <Mail size={20} />, label: "Email" },
-              ].map((social, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white/5 text-[#2FADE6] p-3 rounded-full cursor-pointer hover:scale-110 hover:bg-[#2FADE6] hover:text-white transition-all border border-white/10"
-                  aria-label={social.label}
-                >
-                  {social.icon}
-                </div>
-              ))}
-            </div>
           </div>
         </div>
       </div>

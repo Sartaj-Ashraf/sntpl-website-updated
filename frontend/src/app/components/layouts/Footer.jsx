@@ -33,28 +33,6 @@ const Footer = () => {
             solutions, powered by robust infrastructure and deep local expertise
             across Jammu & Kashmir and beyond.
           </p>
-
-          {/* Social Icons */}
-          <div className="flex space-x-4">
-            {[
-              {
-                icon: <Instagram size={20} />,
-                color:
-                  "bg-gradient-to-tr from-yellow-400 via-red-500 to-purple-600",
-              },
-              { icon: <Twitter size={20} />, color: "bg-blue-400" },
-              { icon: <Facebook size={20} />, color: "bg-blue-600" },
-              { icon: <Mail size={20} />, color: "bg-sky-400" },
-            ].map((social, idx) => (
-              <a
-                key={idx}
-                href="#"
-                className={`${social.color} p-2.5 rounded-full hover:scale-110 transition-transform shadow-lg flex items-center justify-center`}
-              >
-                {social.icon}
-              </a>
-            ))}
-          </div>
         </div>
 
         {/* Quick Links */}
@@ -81,13 +59,12 @@ const Footer = () => {
         {/* Services */}
         <div>
           <h3 className="text-xl font-medium border-b-2 border-white pb-1 mb-8 inline-block">
-            Services
+            Others
           </h3>
           <ul className="space-y-4 text-sm text-gray-200">
-            <li>Internet Connectivity</li>
-            <li>Network Infrastructure</li>
-            <li>Enterprise Solutions</li>
-            <li>Technical Support</li>
+            <li>Privacy Policy</li>
+            <li>Disclaimers</li>
+            <li>Terms & Conditions</li>
           </ul>
         </div>
 

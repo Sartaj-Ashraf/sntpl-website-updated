@@ -35,16 +35,6 @@ const PricingHero = () => {
               Flexible plans designed to match your connectivity needs, offering
               the right balance of speed, reliability, and value.
             </p>
-
-            {/* Buttons */}
-            <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button className="w-full sm:w-auto bg-[#2FADE6] hover:bg-[#258ab8] text-black font-bold py-3.5 px-10 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95">
-                View Plans
-              </button>
-              <button className="w-full sm:w-auto border border-white/30 hover:bg-white/10 text-white font-bold py-3.5 px-10 rounded-full transition-all duration-300 transform hover:scale-105 active:scale-95">
-                Contact Sales
-              </button>
-            </div>
           </div>
         </div>
       </section>

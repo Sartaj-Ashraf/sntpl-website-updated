@@ -2,6 +2,7 @@ import React from "react";
 import Navbar from "../../layouts/Navbar";
 import Image from "next/image";
 import heroImg from "../../../../../public/images/serviceshero.png";
+import Link from "next/link";
 
 const ServicesHero = () => {
   return (
@@ -37,9 +38,9 @@ const ServicesHero = () => {
             </p>
 
             {/* Call to Action Button */}
-            <button className="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-lg">
+            <Link href="/contact" className="bg-white text-black px-8 py-3 rounded-full font-medium hover:bg-sky-500 hover:text-white transition-all duration-300 shadow-lg">
               Get Started
-            </button>
+            </Link>
           </div>
         </main>
       </div>
