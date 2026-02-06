@@ -48,8 +48,10 @@ const OurVision = () => {
               Our Vision
             </h2>
             <p className="text-black text-lg md:text-xl font-semibold leading-snug">
-              To bridge digital gaps and enable seamless connectivity for
-              communities, businesses, and institutions.
+              To bridge digital gaps and enable seamless, high-speed
+              connectivity for communities, businesses, and institutions
+              delivering reliable internet services that power communication,
+              growth, and opportunity.
             </p>
           </div>
         </div>

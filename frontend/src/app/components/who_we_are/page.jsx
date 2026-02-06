@@ -85,17 +85,18 @@ const AboutIntroduction = () => {
             <div className="absolute inset-0 bg-gradient-to-tr from-[#2FADE6]/10 to-transparent transition-opacity duration-700 group-hover/image:opacity-80" />
           </div>
 
-          {/* Foundation & Vision - Fixed to always show 3 lines with proper spacing */}
-          <div className="absolute -bottom-10 left-0 sm:left-4 lg:-left-20 bg-white/95 lg:bg-transparent p-5 md:p-6 lg:p-0 rounded-2xl lg:rounded-none shadow-xl lg:shadow-none z-20 border border-[#2FADE6]/10 lg:border-none pointer-events-none min-w-max">
-            <h3 className="text-3xl md:text-5xl lg:text-7xl font-bold text-black leading-none tracking-tighter">
-              Foundation <br className="lg:hidden" />
-              <span className="hidden lg:inline">&</span>
-              <br className="hidden lg:block" />
-              <span className="lg:hidden">& </span>
-              <span className="text-[#2FADE6] drop-shadow-[0_0_15px_rgba(47,173,230,0.3)]">
-                Vision
-              </span>
-            </h3>
+          {/* Foundation & Vision - Blue Box Update */}
+          <div className="absolute -bottom-10 left-0 sm:left-4 lg:-left-20 z-20 pointer-events-none min-w-max">
+            {/* The Blue Box Container */}
+            <div className="bg-[#147CAA] p-6 md:p-8 lg:p-10 rounded-[24px] shadow-2xl">
+              <h3 className="text-3xl md:text-5xl lg:text-7xl font-bold text-white leading-tight tracking-tighter">
+                Foundation <br className="lg:hidden" />
+                <span className="hidden lg:inline">&</span>
+                <br className="hidden lg:block" />
+                <span className="lg:hidden">& </span>
+                <span className="text-white">Vision</span>
+              </h3>
+            </div>
           </div>
 
           <div className="absolute -inset-2 md:-inset-4 border border-[#2FADE6]/10 rounded-[2.5rem] md:rounded-[4rem] -z-10 animate-pulse" />

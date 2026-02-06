@@ -38,7 +38,7 @@ const Testimonials = () => {
       name: "Abrar Ahmad",
       role: "CEO, Education tech",
       text: "Professional repairs and responsible recycling Professional repairs and responsible recycling Professional.",
-      variant: "blue", // Blue glow border
+      variant: "blue",
     },
     {
       name: "Abrar Ahmad",
@@ -85,7 +85,6 @@ const Testimonials = () => {
           </p>
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             More Than 250+{" "}
-            {/* FIXED: Removed solid background, added text color + glow */}
             <span className="text-[#2FADE6] drop-shadow-[0_0_15px_rgba(47,173,230,0.4)]">
               Testimonial
             </span>
@@ -151,13 +150,13 @@ const Testimonials = () => {
                       />
                     </div>
 
-                    {/* Stars */}
+                    {/* Stars - Fixed to Yellow/Amber for all cards */}
                     <div className="flex gap-1 mb-6">
                       {[...Array(5)].map((_, i) => (
                         <Star
                           key={i}
                           size={16}
-                          fill={item.variant === "blue" ? "#2FADE6" : "#FFD700"}
+                          fill="#FBBF24" // Static Golden Yellow
                           strokeWidth={0}
                         />
                       ))}

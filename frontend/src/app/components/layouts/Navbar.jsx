@@ -20,6 +20,18 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  // --- Logic to handle scroll to top if already on the page ---
+  const handleNavLinkClick = (e, href) => {
+    if (pathname === href) {
+      e.preventDefault();
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth",
+      });
+      setIsOpen(false); // Close mobile menu if open
+    }
+  };
+
   const navLinks = [
     { name: "Home", href: "/" },
     { name: "About Us", href: "/about" },
@@ -42,8 +54,12 @@ const Navbar = () => {
             scrolled ? "border-transparent" : "border-white/10"
           }`}
         >
-          {/* Logo */}
-          <Link href="/" className="flex items-center gap-3 group">
+          {/* Logo - Added onClick handler */}
+          <Link
+            href="/"
+            className="flex items-center gap-3 group"
+            onClick={(e) => handleNavLinkClick(e, "/")}
+          >
             <div className="relative h-9 w-9 md:h-11 md:w-11 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
               <Image
                 src={logo}
@@ -66,6 +82,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
+                  onClick={(e) => handleNavLinkClick(e, link.href)}
                   className={`transition-all duration-300 ${
                     isActive
                       ? "rounded-full bg-white px-5 py-2 text-black transform scale-105"
@@ -107,7 +124,7 @@ const Navbar = () => {
                 <Link
                   key={link.name}
                   href={link.href}
-                  onClick={() => setIsOpen(false)}
+                  onClick={(e) => handleNavLinkClick(e, link.href)}
                   className={`text-lg font-medium py-3 px-4 rounded-2xl transition-all duration-300 hover:bg-white/10 active:scale-95 border-b border-gray-800 last:border-0 ${
                     isActive ? "bg-white text-black" : "hover:translate-x-2"
                   }`}

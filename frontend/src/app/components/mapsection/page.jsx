@@ -31,7 +31,7 @@ const MapSection = () => {
                 loading="lazy"
                 referrerPolicy="no-referrer-when-downgrade"
                 /* These filters create the dark-mode effect seen in your reference */
-                className="grayscale contrast-125 invert-[0.9] hue-rotate-180 border-0"
+                className=" contrast-125 invert-[0.9] hue-rotate-180 border-0"
               />
             </div>
           </div>
