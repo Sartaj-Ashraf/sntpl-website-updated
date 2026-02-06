@@ -3,9 +3,24 @@ import React, { useState } from "react";
 import Image from "next/image";
 import whoweserve from "../../../../public/images/whoweserve.png";
 import doublechevron from "../../../../public/images/doublechevron.png";
+import telecom from "../../../../public/images/telecom.png";
+import corporates from "../../../../public/images/corporates2.png";
+import media from "../../../../public/images/media.png";
+import banking from "../../../../public/images/banking.png";
+import medical from "../../../../public/images/medical.png";
+import automotive from "../../../../public/images/automotive.jpg";
 
 const WhoWeServe = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
+
+  const sectorImages = {
+    telecom: telecom,
+    corporates: corporates,
+    media: media,
+    banking: banking,
+    medical: medical,
+    automotive: automotive,
+  };
 
   const sectors = [
     { title: "Telecom", id: "telecom" },
@@ -37,7 +52,7 @@ const WhoWeServe = () => {
             Who We Serve
           </h2>
           <p className="text-gray-400 max-w-2xl mx-auto text-sm md:text-base opacity-80 leading-relaxed px-4">
-            At Srinagar Net Tech Pvt. Ltd., we provide reliable and high-speed
+            At Srinagar Net Tech Pvt. Ltd., we provide reliable and high speed
             internet services tailored for businesses, enterprises, and
             institutions.
           </p>
@@ -108,7 +123,7 @@ const WhoWeServe = () => {
                         ${isHovered ? "md:flex-row items-center justify-between gap-6 lg:gap-10" : "items-center justify-center lg:justify-start"}
                       `}
                       >
-                        {/* Description - Logic from 2nd code (Fixed width + Delay), but maintains relative positioning */}
+                        {/* Description */}
                         <div
                           className={`transition-all duration-700 ease-in-out order-2 md:order-1 w-full md:w-[450px]
                             ${isHovered ? "opacity-100 translate-y-0 delay-300 relative" : "opacity-0 translate-y-4 pointer-events-none absolute"}
@@ -119,14 +134,14 @@ const WhoWeServe = () => {
                           </p>
                         </div>
 
-                        {/* Image Container - Positioning maintained from 1st code */}
+                        {/* Image Container */}
                         <div
                           className={`relative shrink-0 rounded-[24px] md:rounded-[30px] overflow-hidden ${smoothTransition} order-1 md:order-2
                           ${
                             isHovered
                               ? "opacity-100 scale-100 translate-y-0"
                               : isAdjacent
-                                ? "opacity-20 scale-90 grayscale lg:absolute lg:right-0" // Keeps image position same as 1st code
+                                ? "opacity-20 scale-90 grayscale lg:absolute lg:right-0"
                                 : "opacity-60 scale-95 translate-y-0"
                           } 
                           `}
@@ -137,7 +152,8 @@ const WhoWeServe = () => {
                           }}
                         >
                           <Image
-                            src={whoweserve}
+                            // Use the mapped sector image based on ID
+                            src={sectorImages[sector.id]}
                             alt={sector.title}
                             fill
                             className={`object-cover ${!isHovered ? "grayscale-[0.5]" : ""}`}

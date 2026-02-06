@@ -1,18 +1,9 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import serviceImg from "../../../../public/images/services.png";
 
-const Services = () => {
+const AllServices = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
-
-  // Updated to match the 4 data points in the screenshot
-  const stats = [
-    { number: "23+", label: "YEARS EXPERIENCE" },
-    { number: "2012", label: "ESTABLISHED" },
-    { number: "J&K", label: "COVERAGE AREA" },
-    { number: "24/7", label: "RELIABLE SERVICE" },
-  ];
 
   const services = [
     {
@@ -26,7 +17,7 @@ const Services = () => {
       title: "Lease Line",
       desc: "Dedicated internet lease line ensuring uninterrupted connectivity with symmetrical upload and download speeds.",
       icon: "/images/leaseline.png",
-      variant: "black",
+      variant: "white",
       hoverImage: "/images/leaseline2.png",
     },
     {
@@ -40,7 +31,7 @@ const Services = () => {
       title: "SD WAN",
       desc: "Modern SD WAN solutions for intelligent routing, cost optimization, and enhanced network security.",
       icon: "/images/sd_wan.png",
-      variant: "black",
+      variant: "white",
       hoverImage: "/images/sd_wan2.png",
     },
     {
@@ -51,10 +42,10 @@ const Services = () => {
       hoverImage: "/images/broadband2.png",
     },
     {
-      title: "Telecom",
+      title: "Telecom", // Changed from "Telecommunication" → fits nicely on all screen sizes
       desc: "We help telecom operators, ISPs, and network providers transform their infrastructure with cutting edge technology.",
       icon: "/images/telecommunication.png",
-      variant: "black",
+      variant: "white",
       hoverImage: "/images/telecommunication2.png",
     },
   ];
@@ -66,65 +57,19 @@ const Services = () => {
   ];
 
   return (
-    <section className="relative w-full bg-black text-white overflow-hidden">
-      {/* Hero section */}
-      <div className="relative w-full h-[500px] md:h-[620px] lg:h-[720px]">
-        <Image
-          src={serviceImg}
-          alt="Global network background"
-          fill
-          className="object-cover !h-auto brightness-[0.45] contrast-[1.1] saturate-[0.85]"
-          priority
-        />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/80" />
-
-        {/* Stats Grid - Layout Updated to 4 cols, Text color & z-index preserved */}
-        <div className="absolute top-[10%] md:top-[15%] left-1/2 -translate-x-1/2 w-full max-w-7xl px-4 sm:px-6">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center">
-            {stats.map((stat, idx) => (
-              <div key={idx}>
-                {/* Kept your blue color and weight */}
-                <h3 className="text-[#2FADE6] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight drop-shadow-xl">
-                  {stat.number}
-                </h3>
-                {/* Applied screenshot label styling: Uppercase + tracking */}
-                <p className="text-[10px] md:text-xs lg:text-sm font-bold text-white/70 mt-3 uppercase tracking-[0.25em] drop-shadow">
-                  {stat.label}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
-
-        {/* Our Services panel - z-index kept as is */}
-        <div className="absolute bottom-[5%] md:bottom-[8%] lg:bottom-[-2%] left-8 max-sm:left-[unset] w-full px-4 sm:px-6">
-          <div className="max-w-7xl mx-auto flex justify-start">
-            <div
-              className="
-                bg-black/75 backdrop-blur-md rounded-2xl p-6 md:p-8 
-                border border-[#2FADE6]/30 shadow-2xl shadow-[#2FADE6]/10
-                w-full sm:max-w-[514px] min-h-[255px]
-                flex flex-col justify-center z-[1]
-              "
-            >
-              <p className="text-[#2FADE6] text-xs sm:text-sm md:text-base uppercase font-semibold tracking-widest mb-2 md:mb-3">
-                WHAT WE DO
-              </p>
-              <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-3 md:mb-4">
-                Our <span className="text-[#2FADE6]">Services</span>
-              </h2>
-              <p className="text-sm sm:text-base md:text-lg text-gray-200 leading-relaxed">
-                Delivering reliable, high speed internet services built on
-                robust infrastructure and local expertise.
-              </p>
-            </div>
-          </div>
-        </div>
+    <section className="relative w-full bg-white overflow-hidden font-sans">
+      {/* Header Section */}
+      <div className="max-w-[1215px] mx-auto pt-20 pb-24 px-4 text-center">
+        <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight">
+          We run all kinds of services in form of{" "}
+          <br className="hidden md:block" />
+          Information & Technologies
+        </h2>
       </div>
 
-      {/* Cards section */}
-      <div className="relative bg-black pt-10 pb-20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6">
+      {/* Cards Section */}
+      <div className="relative bg-white pb-20">
+        <div className="max-w-[1215px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
             {columns.map((column, colIdx) => (
               <div
@@ -143,17 +88,17 @@ const Services = () => {
                       onMouseEnter={() => setHoveredIndex(globalIndex)}
                       onMouseLeave={() => setHoveredIndex(null)}
                       className={`relative p-5 sm:p-8 rounded-3xl flex flex-col items-center text-center transition-all duration-700 ease-in-out overflow-hidden cursor-pointer border 
-                         ${
-                           isHovered
-                             ? "h-[320px] max-sm:h-[370px] md:h-[570px] md:hover:h-[530px]"
-                             : isNeighbor
-                               ? "h-[160px] sm:h-[200px] md:h-[260px]"
-                               : "h-[180px] sm:h-[240px] md:h-[330px]"
-                         }
+                        ${
+                          isHovered
+                            ? "h-[320px] max-sm:h-[370px] md:h-[570px] md:hover:h-[530px]"
+                            : isNeighbor
+                              ? "h-[160px] sm:h-[200px] md:h-[260px]"
+                              : "h-[180px] sm:h-[240px] md:h-[330px]"
+                        }
                         ${
                           service.variant === "blue"
                             ? "bg-[#2FADE6] text-black border-transparent"
-                            : "bg-black text-white border-white/20"
+                            : "bg-white text-black border-[#2FADE6]/30 shadow-sm"
                         }`}
                     >
                       <div
@@ -166,17 +111,23 @@ const Services = () => {
                           <Image
                             src={service.icon}
                             alt={`${service.title} icon`}
-                            width={45}
-                            height={45}
-                            className={`object-contain md:w-[70px] md:h-[70px] transition-all duration-500 ${
-                              service.variant === "black"
+                            width={70}
+                            height={70}
+                            className={`object-contain transition-all duration-500 ${
+                              service.variant === "blue"
                                 ? "brightness-0 invert"
                                 : ""
                             }`}
                           />
                         </div>
 
-                        <h4 className="text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-5 leading-tight break-words">
+                        <h4
+                          className={`text-lg sm:text-2xl md:text-3xl lg:text-4xl font-bold mb-2 md:mb-5 leading-tight break-words ${
+                            service.variant === "white"
+                              ? "text-[#2FADE6]"
+                              : "text-black"
+                          }`}
+                        >
                           {service.title}
                         </h4>
 
@@ -185,13 +136,7 @@ const Services = () => {
                             isNeighbor ? "opacity-0 h-0" : "opacity-100"
                           }`}
                         >
-                          <p
-                            className={`text-xs sm:text-base leading-snug md:leading-relaxed text-center ${
-                              service.variant === "blue"
-                                ? "text-black/80"
-                                : "text-gray-300/90"
-                            }`}
-                          >
+                          <p className="text-xs sm:text-base leading-snug md:leading-relaxed text-center text-black/80 font-medium">
                             {service.desc}
                           </p>
                         </div>
@@ -210,8 +155,7 @@ const Services = () => {
                             alt={service.title}
                             width={520}
                             height={320}
-                            style={{ height: "auto", width: "100%" }}
-                            className="object-cover object-bottom"
+                            className="object-cover object-bottom w-full h-auto"
                           />
                         </div>
                       )}
@@ -227,4 +171,4 @@ const Services = () => {
   );
 };
 
-export default Services;
+export default AllServices;

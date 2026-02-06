@@ -35,8 +35,6 @@ const VisionaryLeadership = () => {
 
           {/* Action Row */}
           <div className="flex flex-row items-center md:gap-[104px]">
-        
-
             <div className="hidden sm:flex items-center">
               <div className="relative w-[313px] h-[80px]">
                 <Image

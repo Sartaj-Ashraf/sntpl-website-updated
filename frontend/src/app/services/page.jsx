@@ -1,6 +1,6 @@
 import React from "react";
 import ServicesHero from "../components/herosections/servicespage/page";
-import AllServices from "../components/allservices/page";
+import AllServices from "../components/allservices/AllServices";
 import WhoWeServe from "../components/whoweserve/page";
 import Contact from "../components/contact/page";
 import Footer from "../components/layouts/Footer";
