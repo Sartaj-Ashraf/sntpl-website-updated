@@ -57,7 +57,7 @@ const AllServices = () => {
   ];
 
   // Animation Constant to keep things consistent
-  const transitionStyle = "0.45s cubic-bezier(0.34, 1.56, 0.64, 1)";
+  const transitionStyle = "0.7s cubic-bezier(0.34, 1.56, 0.64, 1)";
 
   return (
     <section className="relative w-full bg-white overflow-hidden font-sans">
