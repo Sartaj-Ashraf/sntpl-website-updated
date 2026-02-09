@@ -42,7 +42,7 @@ const AllServices = () => {
       hoverImage: "/images/broadband2.png",
     },
     {
-      title: "Telecom", // Changed from "Telecommunication" → fits nicely on all screen sizes
+      title: "Telecom",
       desc: "We help telecom operators, ISPs, and network providers transform their infrastructure with cutting edge technology.",
       icon: "/images/telecommunication.png",
       variant: "white",
@@ -56,9 +56,11 @@ const AllServices = () => {
     [services[2], services[5]],
   ];
 
+  // Animation Constant to keep things consistent
+  const transitionStyle = "0.45s cubic-bezier(0.34, 1.56, 0.64, 1)";
+
   return (
     <section className="relative w-full bg-white overflow-hidden font-sans">
-      {/* Header Section */}
       <div className="max-w-[1215px] mx-auto pt-20 pb-24 px-4 text-center">
         <h2 className="text-3xl md:text-5xl font-bold text-black leading-tight">
           We run all kinds of services in form of{" "}
@@ -67,7 +69,6 @@ const AllServices = () => {
         </h2>
       </div>
 
-      {/* Cards Section */}
       <div className="relative bg-white pb-20">
         <div className="max-w-[1215px] mx-auto px-4 sm:px-6">
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-6 lg:gap-8">
@@ -87,7 +88,7 @@ const AllServices = () => {
                       key={globalIndex}
                       onMouseEnter={() => setHoveredIndex(globalIndex)}
                       onMouseLeave={() => setHoveredIndex(null)}
-                      className={`relative p-5 sm:p-8 rounded-3xl flex flex-col items-center text-center transition-all duration-700 ease-in-out overflow-hidden cursor-pointer border 
+                      className={`relative p-5 sm:p-8 rounded-3xl flex flex-col items-center text-center overflow-hidden cursor-pointer border 
                         ${
                           isHovered
                             ? "h-[320px] max-sm:h-[370px] md:h-[570px] md:hover:h-[530px]"
@@ -100,12 +101,24 @@ const AllServices = () => {
                             ? "bg-[#2FADE6] text-black border-transparent"
                             : "bg-white text-black border-[#2FADE6]/30 shadow-sm"
                         }`}
+                      style={{
+                        transition: `height ${transitionStyle}`,
+                        willChange: "height",
+                        transform: "translate3d(0, 0, 0)",
+                        WebkitBackfaceVisibility: "hidden",
+                      }}
                     >
                       <div
-                        className={`relative flex flex-col items-center flex-grow transition-all duration-700
+                        className={`relative flex flex-col items-center flex-grow
                           ${isHovered ? "pb-4 md:pb-32" : "pb-8 md:pb-48"}
                           ${isNeighbor ? "scale-90 opacity-50" : ""}
                         `}
+                        style={{
+                          transition: `padding ${transitionStyle}, transform ${transitionStyle}, opacity ${transitionStyle}`,
+                          transform: isNeighbor
+                            ? "scale(0.9) translate3d(0, 0, 0)"
+                            : "translate3d(0, 0, 0)",
+                        }}
                       >
                         <div className="mb-3 md:mb-6">
                           <Image
@@ -132,9 +145,10 @@ const AllServices = () => {
                         </h4>
 
                         <div
-                          className={`transition-all duration-500 px-2 sm:px-3 ${
-                            isNeighbor ? "opacity-0 h-0" : "opacity-100"
-                          }`}
+                          className={`px-2 sm:px-3 ${isNeighbor ? "opacity-0 h-0" : "opacity-100"}`}
+                          style={{
+                            transition: `opacity 0.4s ease, height 0.4s ease`,
+                          }}
                         >
                           <p className="text-xs sm:text-base leading-snug md:leading-relaxed text-center text-black/80 font-medium">
                             {service.desc}
@@ -144,11 +158,17 @@ const AllServices = () => {
 
                       {service.hoverImage && (
                         <div
-                          className={`absolute left-1/2 -translate-x-1/2 w-[92%] sm:w-[88%] rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-700 ease-in-out ${
-                            isHovered
-                              ? "bottom-3 md:bottom-8 opacity-100 translate-y-0"
-                              : "bottom-0 opacity-0 translate-y-8 md:translate-y-20"
+                          className={`absolute left-1/2 w-[92%] sm:w-[88%] rounded-xl sm:rounded-2xl overflow-hidden ${
+                            isHovered ? "opacity-100" : "opacity-0"
                           }`}
+                          style={{
+                            bottom: isHovered ? "12px" : "0px",
+                            transform: isHovered
+                              ? "translate(-50%, 0)"
+                              : "translate(-50%, 40px)",
+                            transition: `transform ${transitionStyle}, opacity ${transitionStyle}, bottom ${transitionStyle}`,
+                            willChange: "transform, opacity",
+                          }}
                         >
                           <Image
                             src={service.hoverImage}

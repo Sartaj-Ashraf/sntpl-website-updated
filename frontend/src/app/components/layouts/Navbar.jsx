@@ -20,16 +20,12 @@ const Navbar = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // --- Logic to handle scroll to top if already on the page ---
   const handleNavLinkClick = (e, href) => {
     if (pathname === href) {
       e.preventDefault();
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
-      });
-      setIsOpen(false); // Close mobile menu if open
+      window.scrollTo({ top: 0, behavior: "smooth" });
     }
+    setIsOpen(false);
   };
 
   const navLinks = [
@@ -41,120 +37,131 @@ const Navbar = () => {
     { name: "My Account", href: "/my-account" },
   ];
 
+  const smoothBezier = "cubic-bezier(0.34, 1.56, 0.64, 1)";
+
   return (
-    <nav
-      className={`fixed top-0 left-0 w-full py-4 md:py-6 z-[100] transition-all duration-300 ${
-        scrolled ? " py-3" : "bg-transparent"
-      }`}
-    >
-      <div className="mx-auto max-w-7xl px-4">
-        {/* Main Pill Container */}
-        <div
-          className={`flex items-center justify-between rounded-full bg-black px-6 md:px-10 h-16 md:h-20 text-white shadow-lg border border-white/5 transition-all duration-300 ${
-            scrolled ? "border-transparent" : "border-white/10"
-          }`}
-        >
-          {/* Logo - Added onClick handler */}
-          <Link
-            href="/"
-            className="flex items-center gap-3 group"
-            onClick={(e) => handleNavLinkClick(e, "/")}
-          >
-            <div className="relative h-9 w-9 md:h-11 md:w-11 transition-transform duration-300 group-hover:scale-110 group-hover:rotate-12">
-              <Image
-                src={logo}
-                alt="SNTPL logo"
-                fill
-                className="object-contain"
-                priority
-              />
-            </div>
-            <span className="text-lg md:text-xl font-bold tracking-wide transition-colors duration-300 group-hover:text-[#2FADE6]">
-              SNTPL
-            </span>
-          </Link>
+    <>
+      {/* Background Overlay for Mobile Menu */}
+      <div
+        className={`fixed inset-0 bg-black/40 backdrop-blur-sm z-[90] md:hidden transition-opacity duration-500 ${
+          isOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+        }`}
+        onClick={() => setIsOpen(false)}
+      />
 
-          {/* Desktop Menu */}
-          <div className="hidden md:flex items-center gap-4 lg:gap-6 text-base font-medium">
-            {navLinks.map((link) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleNavLinkClick(e, link.href)}
-                  className={`transition-all duration-300 ${
-                    isActive
-                      ? "rounded-full bg-white px-5 py-2 text-black transform scale-105"
-                      : "hover:text-[#2FADE6] hover:scale-110"
-                  }`}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
-          </div>
-
-          {/* Mobile Toggle Button */}
-          <button
-            className="md:hidden p-2 text-white focus:outline-none transition-transform duration-300 active:scale-90"
-            onClick={() => setIsOpen(!isOpen)}
-            aria-label="Toggle menu"
+      <nav
+        className={`fixed top-0 left-0 w-full z-[100] transition-all duration-500 ${
+          scrolled ? "py-2" : "py-4 md:py-6 bg-transparent"
+        }`}
+      >
+        <div className="mx-auto max-w-7xl px-4">
+          <div
+            className={`flex items-center justify-between rounded-full bg-black/95 backdrop-blur-md px-6 md:px-10 h-16 md:h-20 text-white shadow-2xl border transition-all duration-500 ${
+              scrolled ? "border-white/5" : "border-white/10"
+            }`}
           >
-            <div
-              className={`transition-transform duration-300 ${isOpen ? "rotate-90" : ""}`}
+            {/* Logo */}
+            <Link
+              href="/"
+              className="flex items-center gap-3 group"
+              onClick={(e) => handleNavLinkClick(e, "/")}
             >
-              {isOpen ? <X size={28} /> : <Menu size={28} />}
-            </div>
-          </button>
-        </div>
+              <div className="relative h-9 w-9 md:h-11 md:w-11 transition-transform duration-500 group-hover:scale-110">
+                <Image
+                  src={logo}
+                  alt="SNTPL logo"
+                  fill
+                  className="object-contain"
+                  priority
+                />
+              </div>
+              <span className="text-lg md:text-xl font-bold tracking-wide transition-colors duration-300 group-hover:text-[#2FADE6]">
+                SNTPL
+              </span>
+            </Link>
 
-        {/* Mobile Menu Dropdown */}
-        <div
-          className={`absolute left-4 right-4 top-24 rounded-3xl bg-black text-white md:hidden shadow-2xl border border-gray-800 overflow-hidden transition-all duration-500 ease-out ${
-            isOpen
-              ? "max-h-[500px] opacity-100 translate-y-0"
-              : "max-h-0 opacity-0 -translate-y-4 pointer-events-none"
-          }`}
-        >
-          <div className="p-6 flex flex-col gap-1">
-            {navLinks.map((link, index) => {
-              const isActive = pathname === link.href;
-              return (
-                <Link
-                  key={link.name}
-                  href={link.href}
-                  onClick={(e) => handleNavLinkClick(e, link.href)}
-                  className={`text-lg font-medium py-3 px-4 rounded-2xl transition-all duration-300 hover:bg-white/10 active:scale-95 border-b border-gray-800 last:border-0 ${
-                    isActive ? "bg-white text-black" : "hover:translate-x-2"
-                  }`}
-                  style={{
-                    animation: isOpen
-                      ? `slideInLeft 0.4s ease-out ${index * 0.08}s both`
-                      : "none",
-                  }}
-                >
-                  {link.name}
-                </Link>
-              );
-            })}
+            {/* Desktop Menu */}
+            <div className="hidden md:flex items-center gap-4 lg:gap-6 text-base font-medium">
+              {navLinks.map((link) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleNavLinkClick(e, link.href)}
+                    className={`transition-all duration-500 px-5 py-2 rounded-full ${
+                      isActive
+                        ? "bg-white text-black scale-105"
+                        : "hover:text-[#2FADE6] hover:bg-white/5"
+                    }`}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
+
+            {/* Mobile Toggle Button */}
+            <button
+              className="md:hidden p-2 text-white focus:outline-none z-[110]"
+              onClick={() => setIsOpen(!isOpen)}
+              aria-label="Toggle menu"
+            >
+              <div className="relative w-7 h-7 flex items-center justify-center">
+                <X
+                  className={`absolute transition-all duration-500 ${isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 -rotate-90 scale-50"}`}
+                  size={28}
+                />
+                <Menu
+                  className={`absolute transition-all duration-500 ${!isOpen ? "opacity-100 rotate-0 scale-100" : "opacity-0 rotate-90 scale-50"}`}
+                  size={28}
+                />
+              </div>
+            </button>
+          </div>
+
+          {/* Mobile Menu Dropdown */}
+          <div
+            className={`absolute left-4 right-4 top-24 rounded-[2.5rem] bg-black border border-white/10 text-white md:hidden shadow-2xl overflow-hidden transition-all duration-500 ${
+              isOpen
+                ? "opacity-100 translate-y-0"
+                : "opacity-0 -translate-y-8 pointer-events-none"
+            }`}
+            style={{
+              transitionTimingFunction: smoothBezier,
+              maxHeight: isOpen ? "500px" : "0px",
+            }}
+          >
+            <div className="p-4 flex flex-col gap-2">
+              {navLinks.map((link, index) => {
+                const isActive = pathname === link.href;
+                return (
+                  <Link
+                    key={link.name}
+                    href={link.href}
+                    onClick={(e) => handleNavLinkClick(e, link.href)}
+                    className={`text-lg font-medium py-4 px-6 rounded-3xl transition-all duration-300 ${
+                      isActive
+                        ? "bg-white text-black"
+                        : "bg-white/5 hover:bg-white/10"
+                    }`}
+                    style={{
+                      transform: isOpen
+                        ? "scale(1) translateY(0)"
+                        : "scale(0.9) translateY(20px)",
+                      opacity: isOpen ? 1 : 0,
+                      transition: `all 0.5s ${smoothBezier} ${index * 0.05}s`,
+                    }}
+                  >
+                    {link.name}
+                  </Link>
+                );
+              })}
+            </div>
           </div>
         </div>
-      </div>
-
-      <style jsx>{`
-        @keyframes slideInLeft {
-          from {
-            opacity: 0;
-            transform: translateX(-30px);
-          }
-          to {
-            opacity: 1;
-            transform: translateX(0);
-          }
-        }
-      `}</style>
-    </nav>
+      </nav>
+    </>
   );
 };
 

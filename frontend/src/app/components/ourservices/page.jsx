@@ -6,7 +6,6 @@ import serviceImg from "../../../../public/images/services.png";
 const Services = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
-  // Updated to match the 4 data points in the screenshot
   const stats = [
     { number: "23+", label: "YEARS EXPERIENCE" },
     { number: "2012", label: "ESTABLISHED" },
@@ -78,16 +77,14 @@ const Services = () => {
         />
         <div className="absolute inset-0 bg-gradient-to-b from-black/30 via-black/50 to-black/80" />
 
-        {/* Stats Grid - Layout Updated to 4 cols, Text color & z-index preserved */}
+        {/* Stats Grid */}
         <div className="absolute top-[10%] md:top-[15%] left-1/2 -translate-x-1/2 w-full max-w-7xl px-4 sm:px-6">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6 md:gap-12 text-center">
             {stats.map((stat, idx) => (
               <div key={idx}>
-                {/* Kept your blue color and weight */}
                 <h3 className="text-[#2FADE6] text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-extrabold tracking-tight drop-shadow-xl">
                   {stat.number}
                 </h3>
-                {/* Applied screenshot label styling: Uppercase + tracking */}
                 <p className="text-[10px] md:text-xs lg:text-sm font-bold text-white/70 mt-3 uppercase tracking-[0.25em] drop-shadow">
                   {stat.label}
                 </p>
@@ -96,7 +93,7 @@ const Services = () => {
           </div>
         </div>
 
-        {/* Our Services panel - z-index kept as is */}
+        {/* Our Services panel */}
         <div className="absolute bottom-[5%] md:bottom-[8%] lg:bottom-[-2%] left-8 max-sm:left-[unset] w-full px-4 sm:px-6">
           <div className="max-w-7xl mx-auto flex justify-start">
             <div
@@ -142,7 +139,7 @@ const Services = () => {
                       key={globalIndex}
                       onMouseEnter={() => setHoveredIndex(globalIndex)}
                       onMouseLeave={() => setHoveredIndex(null)}
-                      className={`relative p-5 sm:p-8 rounded-3xl flex flex-col items-center text-center transition-all duration-700 ease-in-out overflow-hidden cursor-pointer border 
+                      className={`relative p-5 sm:p-8 rounded-3xl flex flex-col items-center text-center overflow-hidden cursor-pointer border 
                          ${
                            isHovered
                              ? "h-[320px] max-sm:h-[370px] md:h-[570px] md:hover:h-[530px]"
@@ -155,12 +152,33 @@ const Services = () => {
                             ? "bg-[#2FADE6] text-black border-transparent"
                             : "bg-black text-white border-white/20"
                         }`}
+                      style={{
+                        transition:
+                          "height 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                        willChange: hoveredIndex !== null ? "height" : "auto",
+                        transform: "translate3d(0, 0, 0)",
+                        WebkitBackfaceVisibility: "hidden",
+                        backfaceVisibility: "hidden",
+                      }}
                     >
                       <div
-                        className={`relative flex flex-col items-center flex-grow transition-all duration-700
+                        className={`relative flex flex-col items-center flex-grow
                           ${isHovered ? "pb-4 md:pb-32" : "pb-8 md:pb-48"}
                           ${isNeighbor ? "scale-90 opacity-50" : ""}
                         `}
+                        style={{
+                          transition:
+                            "padding 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                          willChange:
+                            hoveredIndex !== null
+                              ? "padding, transform, opacity"
+                              : "auto",
+                          transform: isNeighbor
+                            ? "scale(0.9) translate3d(0, 0, 0)"
+                            : "translate3d(0, 0, 0)",
+                          WebkitBackfaceVisibility: "hidden",
+                          backfaceVisibility: "hidden",
+                        }}
                       >
                         <div className="mb-3 md:mb-6">
                           <Image
@@ -168,11 +186,12 @@ const Services = () => {
                             alt={`${service.title} icon`}
                             width={45}
                             height={45}
-                            className={`object-contain md:w-[70px] md:h-[70px] transition-all duration-500 ${
+                            className={`object-contain md:w-[70px] md:h-[70px] ${
                               service.variant === "black"
                                 ? "brightness-0 invert"
                                 : ""
                             }`}
+                            loading="lazy"
                           />
                         </div>
 
@@ -181,9 +200,17 @@ const Services = () => {
                         </h4>
 
                         <div
-                          className={`transition-all duration-500 px-2 sm:px-3 ${
+                          className={`px-2 sm:px-3 ${
                             isNeighbor ? "opacity-0 h-0" : "opacity-100"
                           }`}
+                          style={{
+                            transition:
+                              "opacity 0.4s cubic-bezier(0.34, 1.56, 0.64, 1), height 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                            willChange:
+                              hoveredIndex !== null
+                                ? "opacity, height"
+                                : "auto",
+                          }}
                         >
                           <p
                             className={`text-xs sm:text-base leading-snug md:leading-relaxed text-center ${
@@ -199,11 +226,24 @@ const Services = () => {
 
                       {service.hoverImage && (
                         <div
-                          className={`absolute left-1/2 -translate-x-1/2 w-[92%] sm:w-[88%] rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-700 ease-in-out ${
+                          className={`absolute left-1/2 w-[92%] sm:w-[88%] rounded-xl sm:rounded-2xl overflow-hidden ${
                             isHovered
-                              ? "bottom-3 md:bottom-8 opacity-100 translate-y-0"
-                              : "bottom-0 opacity-0 translate-y-8 md:translate-y-20"
+                              ? "bottom-3 md:bottom-8 opacity-100"
+                              : "bottom-0 opacity-0"
                           }`}
+                          style={{
+                            transform: isHovered
+                              ? "translate(-50%, 0) translate3d(0, 0, 0)"
+                              : "translate(-50%, 2rem) translate3d(0, 0, 0)",
+                            transition:
+                              "transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.5s cubic-bezier(0.34, 1.56, 0.64, 1), bottom 0.5s cubic-bezier(0.34, 1.56, 0.64, 1)",
+                            willChange:
+                              hoveredIndex !== null
+                                ? "transform, opacity, bottom"
+                                : "auto",
+                            WebkitBackfaceVisibility: "hidden",
+                            backfaceVisibility: "hidden",
+                          }}
                         >
                           <Image
                             src={service.hoverImage}
@@ -212,6 +252,7 @@ const Services = () => {
                             height={320}
                             style={{ height: "auto", width: "100%" }}
                             className="object-cover object-bottom"
+                            loading="lazy"
                           />
                         </div>
                       )}

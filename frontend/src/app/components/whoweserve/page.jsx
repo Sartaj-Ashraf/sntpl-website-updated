@@ -1,25 +1,24 @@
 "use client";
 import React, { useState } from "react";
 import Image from "next/image";
-import whoweserve from "../../../../public/images/whoweserve.png";
-import doublechevron from "../../../../public/images/doublechevron.png";
 import telecom from "../../../../public/images/telecom.png";
 import corporates from "../../../../public/images/corporates2.png";
 import media from "../../../../public/images/media.png";
 import banking from "../../../../public/images/banking.png";
 import medical from "../../../../public/images/medical.png";
 import automotive from "../../../../public/images/automotive.jpg";
+import doublechevron from "../../../../public/images/doublechevron.png";
 
 const WhoWeServe = () => {
   const [hoveredIndex, setHoveredIndex] = useState(null);
 
   const sectorImages = {
-    telecom: telecom,
-    corporates: corporates,
-    media: media,
-    banking: banking,
-    medical: medical,
-    automotive: automotive,
+    telecom,
+    corporates,
+    media,
+    banking,
+    medical,
+    automotive,
   };
 
   const sectors = [
@@ -40,8 +39,8 @@ const WhoWeServe = () => {
   const description =
     "SNTPL delivers next generation solutions that power connectivity across networks. We specialize in building robust infrastructure.";
 
-  const smoothTransition =
-    "transition-all duration-700 ease-[cubic-bezier(0.25,1,0.5,1)]";
+  // Consistent high-performance timing function
+  const smoothBezier = "cubic-bezier(0.34, 1.56, 0.64, 1)";
 
   return (
     <section className="bg-black py-16 md:py-24 px-4 md:px-8 lg:px-10 overflow-hidden font-sans">
@@ -67,7 +66,7 @@ const WhoWeServe = () => {
             return (
               <div
                 key={rowIndex}
-                className="flex flex-col lg:flex-row gap-5 lg:h-[408px]"
+                className="flex flex-col lg:flex-row gap-5 lg:h-[400px]"
               >
                 {row.map((sector, colIndex) => {
                   const globalIndex = rowIndex * 2 + colIndex;
@@ -82,16 +81,20 @@ const WhoWeServe = () => {
                       onClick={() =>
                         setHoveredIndex(isHovered ? null : globalIndex)
                       }
-                      className={`relative overflow-hidden rounded-[32px] md:rounded-[40px] cursor-pointer p-6 md:p-10 flex flex-col ${smoothTransition}
-                        ${isHovered ? "lg:flex-[3.5] bg-[#2FADE6]" : "lg:flex-[1] bg-[#111111] hover:bg-[#1a1a1a]"}
-                        ${isHovered ? "min-h-[450px] lg:min-h-0" : "min-h-[280px] md:min-h-[320px] lg:min-h-0"}
+                      className={`relative overflow-hidden rounded-[32px] md:rounded-[40px] cursor-pointer p-6 md:p-10 flex flex-col 
+                        ${isHovered ? "lg:flex-[3.5] bg-[#2FADE6]" : "lg:flex-[1] bg-[#111111]"}
+                        ${isHovered ? "min-h-[450px] lg:min-h-0" : "min-h-[220px] md:min-h-[280px] lg:min-h-0"}
                       `}
-                      style={{ transform: "translateZ(0)" }}
+                      style={{
+                        transition: `all 0.5s ${smoothBezier}`,
+                        willChange: "flex, height, background-color",
+                        transform: "translateZ(0)",
+                      }}
                     >
-                      {/* 1. Header Area */}
+                      {/* Header Area */}
                       <div className="flex justify-between items-center w-full mb-4 z-10">
                         <h3
-                          className={`font-bold leading-tight ${smoothTransition}
+                          className={`font-bold leading-tight transition-all duration-500
                           ${
                             isHovered
                               ? "text-black text-2xl md:text-3xl lg:text-[44px]"
@@ -105,29 +108,34 @@ const WhoWeServe = () => {
                         </h3>
 
                         <div
-                          className={`shrink-0 transition-all duration-500 ${isAdjacent ? "lg:opacity-0 lg:scale-50" : "opacity-100 scale-100"}`}
+                          className={`shrink-0 transition-all duration-500 ${
+                            isAdjacent
+                              ? "lg:opacity-0 lg:scale-50"
+                              : "opacity-100 scale-100"
+                          }`}
                         >
                           <Image
                             src={doublechevron}
                             alt="chevron"
                             width={24}
                             height={24}
-                            className={`${smoothTransition} ${isHovered ? "brightness-0" : "invert"} ${isHovered ? "rotate-90 lg:rotate-0" : ""}`}
+                            className={`transition-all duration-500 ${isHovered ? "brightness-0 rotate-90 lg:rotate-0" : "invert"}`}
                           />
                         </div>
                       </div>
 
-                      {/* 2. Content Area */}
+                      {/* Content Area */}
                       <div
-                        className={`relative flex flex-col h-full w-full ${smoothTransition} 
+                        className={`relative flex flex-col h-full w-full transition-all duration-500
                         ${isHovered ? "md:flex-row items-center justify-between gap-6 lg:gap-10" : "items-center justify-center lg:justify-start"}
                       `}
                       >
                         {/* Description */}
                         <div
-                          className={`transition-all duration-700 ease-in-out order-2 md:order-1 w-full md:w-[450px]
-                            ${isHovered ? "opacity-100 translate-y-0 delay-300 relative" : "opacity-0 translate-y-4 pointer-events-none absolute"}
+                          className={`order-2 md:order-1 w-full md:w-[450px]
+                            ${isHovered ? "opacity-100 translate-y-0 delay-150" : "opacity-0 translate-y-8 absolute pointer-events-none"}
                           `}
+                          style={{ transition: `all 0.4s ease-out` }}
                         >
                           <p className="text-black/80 text-base md:text-lg font-medium leading-relaxed">
                             {description}
@@ -136,27 +144,28 @@ const WhoWeServe = () => {
 
                         {/* Image Container */}
                         <div
-                          className={`relative shrink-0 rounded-[24px] md:rounded-[30px] overflow-hidden ${smoothTransition} order-1 md:order-2
+                          className={`relative shrink-0 rounded-[24px] md:rounded-[30px] overflow-hidden order-1 md:order-2
                           ${
                             isHovered
-                              ? "opacity-100 scale-100 translate-y-0"
+                              ? "opacity-100 scale-100"
                               : isAdjacent
-                                ? "opacity-20 scale-90 grayscale lg:absolute lg:right-0"
-                                : "opacity-60 scale-95 translate-y-0"
+                                ? "opacity-10 scale-90 grayscale lg:absolute lg:right-0"
+                                : "opacity-50 scale-95"
                           } 
                           `}
                           style={{
+                            transition: `all 0.5s ${smoothBezier}`,
                             width: "100%",
-                            maxWidth: "347px",
-                            height: "211px",
+                            maxWidth: isHovered ? "400px" : "347px",
+                            height: isHovered ? "240px" : "211px",
+                            willChange: "transform, opacity, width, height",
                           }}
                         >
                           <Image
-                            // Use the mapped sector image based on ID
                             src={sectorImages[sector.id]}
                             alt={sector.title}
                             fill
-                            className={`object-cover ${!isHovered ? "grayscale-[0.5]" : ""}`}
+                            className={`object-cover transition-all duration-700 ${!isHovered ? "grayscale-[0.5]" : "grayscale-0"}`}
                           />
                         </div>
                       </div>
