@@ -4,8 +4,9 @@ import Navbar from "../../layouts/Navbar";
 
 const ContactHero = () => {
   return (
+    <>
       <Navbar />
-    </div>
+    </>
   );
 };
 

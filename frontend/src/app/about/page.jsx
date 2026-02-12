@@ -7,6 +7,7 @@ import OurVision from "../components/ourvision/page";
 import WhyChooseUs from "../components/whychooseus/page";
 import Contact from "../components/contact/page";
 import Footer from "../components/layouts/Footer";
+
 const page = () => {
   return (
     <div>
