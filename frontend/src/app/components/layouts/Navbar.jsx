@@ -33,8 +33,8 @@ const Navbar = () => {
     { name: "About Us", href: "/about" },
     { name: "Services", href: "/services" },
     { name: "Pricing", href: "/pricing" },
-    { name: "Contact Us", href: "/contact" },
-    { name: "My Account", href: "/my-account" },
+    { name: "Contact", href: "/contact" }, // Shortened "Contact Us" to "Contact" for tablet space
+    { name: "Account", href: "/my-account" }, // Shortened "My Account" to "Account"
   ];
 
   const smoothBezier = "cubic-bezier(0.34, 1.56, 0.64, 1)";
@@ -56,17 +56,17 @@ const Navbar = () => {
       >
         <div className="mx-auto max-w-7xl px-4">
           <div
-            className={`flex items-center justify-between rounded-full bg-black/95 backdrop-blur-md px-6 md:px-10 h-16 md:h-20 text-white shadow-2xl border transition-all duration-500 ${
+            className={`flex items-center justify-between rounded-full bg-black/95 backdrop-blur-md px-4 md:px-6 lg:px-10 h-16 md:h-20 text-white shadow-2xl border transition-all duration-500 ${
               scrolled ? "border-white/5" : "border-white/10"
             }`}
           >
             {/* Logo */}
             <Link
               href="/"
-              className="flex items-center gap-3 group"
+              className="flex items-center gap-2 md:gap-3 group shrink-0"
               onClick={(e) => handleNavLinkClick(e, "/")}
             >
-              <div className="relative h-9 w-9 md:h-11 md:w-11 transition-transform duration-500 group-hover:scale-110">
+              <div className="relative h-8 w-8 md:h-11 md:w-11 transition-transform duration-500 group-hover:scale-110">
                 <Image
                   src={logo}
                   alt="SNTPL logo"
@@ -75,13 +75,13 @@ const Navbar = () => {
                   priority
                 />
               </div>
-              <span className="text-lg md:text-xl font-bold tracking-wide transition-colors duration-300 group-hover:text-[#2FADE6]">
+              <span className="text-base md:text-xl font-bold tracking-wide transition-colors duration-300 group-hover:text-[#2FADE6]">
                 SNTPL
               </span>
             </Link>
 
-            {/* Desktop Menu */}
-            <div className="hidden md:flex items-center gap-4 lg:gap-6 text-base font-medium">
+            {/* Desktop Menu - Optimized for 768px (Tablet) */}
+            <div className="hidden md:flex items-center gap-1 lg:gap-4 text-sm lg:text-base font-medium">
               {navLinks.map((link) => {
                 const isActive = pathname === link.href;
                 return (
@@ -89,7 +89,7 @@ const Navbar = () => {
                     key={link.name}
                     href={link.href}
                     onClick={(e) => handleNavLinkClick(e, link.href)}
-                    className={`transition-all duration-500 px-5 py-2 rounded-full ${
+                    className={`transition-all duration-500 px-3 lg:px-5 py-2 rounded-full whitespace-nowrap ${
                       isActive
                         ? "bg-white text-black scale-105"
                         : "hover:text-[#2FADE6] hover:bg-white/5"

@@ -240,9 +240,11 @@ const Contact = () => {
                     />
                   </div>
                   <span className="leading-relaxed group-hover:text-[#2FADE6] transition-colors">
-                    Al Hyder shopping Complex, hyderpora <br />
-                    By pass Srinagar, Jammu and <br />
-                    Kashmir-190014
+                    First Floor Al-Hyder Shopping Complex,
+                    <br />
+                    Hyderpora-190018, Srinagar,
+                    <br />
+                    Jammu and Kashmir
                   </span>
                 </div>
               </div>
