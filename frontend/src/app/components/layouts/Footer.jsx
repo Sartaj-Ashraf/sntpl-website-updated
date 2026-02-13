@@ -131,11 +131,14 @@ const Footer = () => {
           </h3>
           <div className="space-y-4 text-sm text-gray-200">
             <p className="leading-relaxed">
-              <span className="block font-semibold text-white">
-                Address: Hyderpora By pass
-              </span>
-              Srinagar 190014
+              <span className="block font-semibold text-white">Address:</span>
+              First Floor Al-Hyder Shopping Complex,
+              <br />
+              Hyderpora-190018, Srinagar,
+              <br />
+              Jammu and Kashmir
             </p>
+
             <p>
               <span className="font-semibold text-white">Phone:</span> +91 9018
               31 2121
